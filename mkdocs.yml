@@ -1,0 +1,70 @@
+site_name: Mora's quick reference
+site_url: https://docs.gmora.work
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+
+  palette:
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  features:
+    # Code
+    - content.code.copy
+    - content.code.annotate
+
+    # Navigation
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+
+    # Search
+    - search.suggest
+    - search.highlight
+    - search.share
+
+markdown_extensions:
+  # Code & Syntax Highlighting
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      use_pygments: true
+      auto_title: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+  # Content Organization
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+  # Icons
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+  # Utilities
+  - attr_list
+  - md_in_html
+  - pymdownx.keys
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
