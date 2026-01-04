@@ -1,5 +1,6 @@
 site_name: Mora's quick reference
 site_url: https://docs.gmora.work
+docs_dir: docs
 
 theme:
   name: material
