@@ -1,6 +1,5 @@
 site_name: Mora's quick reference
-# site_url: https://docs.gmora.work
-site_url: https://m0r4a.github.io/quick-references/
+site_url: https://docs.gmora.work
 docs_dir: docs
 
 theme:
