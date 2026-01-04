@@ -1,15 +1,13 @@
 # Grafana Dashboards: A Complete Guide
 
 !!! quote "Article Metadata"
-    **Title:** Grafana dashboards: A complete guide to all the different types you can build
+    **Title:** [Grafana dashboards: A complete guide to all the different types you can build](https://grafana.com/blog/grafana-dashboards-a-complete-guide-to-all-the-different-types-you-can-build/?pg=webinar-getting-started-with-grafana-dashboard-design-amer&plcmt=related-content-1)
 
     :material-account: **Author:** Alexandre de Verteuil
 
     :material-calendar: **Published:** 2022-06-07 • 16 min
 
     :material-update: **Updated:** Jan 9, 2023
-
-    :material-link: **Link:** https://grafana.com/blog/grafana-dashboards-a-complete-guide-to-all-the-different-types-you-can-build/?pg=webinar-getting-started-with-grafana-dashboard-design-amer&plcmt=related-content-1
 
     *Editor’s note: This blog was updated on Jan. 9, 2023, to reflect our latest releases.*
 
