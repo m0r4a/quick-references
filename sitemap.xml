@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://blog.gmora.work/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.gmora.work/blog/SLOs/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.gmora.work/books/Site%20Reliability%20Engineering/Chapter%201/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.gmora.work/cheatsheets/grafana_dashboards/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.gmora.work/cheatsheets/logQL/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.gmora.work/cheatsheets/mkdocs_cheatsheet/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.gmora.work/cheatsheets/promQL/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+    <url>
+         <loc>https://blog.gmora.work/projects/ktsw/main/</loc>
+         <lastmod>2026-01-17</lastmod>
+    </url>
+</urlset>

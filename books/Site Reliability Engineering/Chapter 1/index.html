@@ -1,0 +1,1600 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blog.gmora.work/books/Site%20Reliability%20Engineering/Chapter%201/">
+      
+      
+        <link rel="prev" href="../../../blog/SLOs/">
+      
+      
+        <link rel="next" href="../../../cheatsheets/grafana_dashboards/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Chapter 1 - Introduction - Mora's blog</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-1-introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Mora&#39;s blog" class="md-header__button md-logo" aria-label="Mora's blog" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mora's blog
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chapter 1 - Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="deep-purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Welcome
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../blog/SLOs/" class="md-tabs__link">
+          
+  
+  
+  Blog
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Books
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../cheatsheets/grafana_dashboards/" class="md-tabs__link">
+          
+  
+  
+  Cheatsheets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../projects/ktsw/main/" class="md-tabs__link">
+          
+  
+  
+  Projects
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Mora&#39;s blog" class="md-nav__button md-logo" aria-label="Mora's blog" data-md-component="logo">
+      
+  <img src="../../../assets/logo.png" alt="logo">
+
+    </a>
+    Mora's blog
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Blog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../blog/SLOs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SLIs, SLOs, and SLAs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Books
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Books
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Site Reliability Engineering
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Site Reliability Engineering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 - Introduction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chapter 1 - Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-the-sysadmin-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem: The Sysadmin Approach
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-the-sre-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Solution: The SRE Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Solution: The SRE Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#team-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Team Composition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-scaling-advantage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Scaling Advantage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-50-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 50% Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devops-vs-sre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DevOps vs. SRE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tenets-of-sre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Tenets of SRE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Tenets of SRE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-durable-focus-on-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Durable Focus on Engineering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-error-budgets-velocity-vs-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Error Budgets (Velocity vs. Stability)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-emergency-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Emergency Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-change-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Change Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-capacity-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Capacity Planning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-provisioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Provisioning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-efficiency-and-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Efficiency and Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheatsheets
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Cheatsheets
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/grafana_dashboards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grafana Dashboards: A Complete Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/logQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LogQL Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/mkdocs_cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mkdocs - Material cheatsheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cheatsheets/promQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PromQL Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projects
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projects
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ktsw
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ktsw
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projects/ktsw/main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KTSW: Kubernetes The Sweaty Way
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-the-sysadmin-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problem: The Sysadmin Approach
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution-the-sre-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Solution: The SRE Approach
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Solution: The SRE Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#team-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Team Composition
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-scaling-advantage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Scaling Advantage
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-50-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The 50% Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#devops-vs-sre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DevOps vs. SRE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-tenets-of-sre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Tenets of SRE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Tenets of SRE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-durable-focus-on-engineering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Durable Focus on Engineering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-error-budgets-velocity-vs-stability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Error Budgets (Velocity vs. Stability)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-emergency-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Emergency Response
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-change-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Change Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-capacity-planning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Capacity Planning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-provisioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Provisioning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-efficiency-and-performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Efficiency and Performance
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="chapter-1-introduction">Chapter 1 - Introduction<a class="headerlink" href="#chapter-1-introduction" title="Permanent link">&para;</a></h1>
+<p><strong>"Hope is not a strategy."</strong> — Traditional SRE saying</p>
+<p>This document breaks down the fundamental shift from the traditional "Sysadmin" model to Google's <strong>Site Reliability Engineering (SRE)</strong> model. It outlines the core tenets necessary to run large-scale systems efficiently.</p>
+<hr />
+<h2 id="the-problem-the-sysadmin-approach">The Problem: The Sysadmin Approach<a class="headerlink" href="#the-problem-the-sysadmin-approach" title="Permanent link">&para;</a></h2>
+<p>Historically, companies treated "Development" and "Operations" as discrete, isolated teams. This model suffers from specific pitfalls:</p>
+<ul>
+<li><strong>Linear Scaling Costs:</strong> As traffic grows, you need more humans to manage events and updates.</li>
+<li><strong>Misaligned Incentives:</strong> Developers want velocity (new features), while Ops want stability (no changes).</li>
+<li><strong>The "Trench Warfare" Effect:</strong> Ops creates gatekeeping to slow down changes, while Devs try to bypass gates with "flag flips" or incremental updates to sneak features in.</li>
+</ul>
+<div class="admonition failure">
+<p class="admonition-title">The Cost of Separation</p>
+<p>The split between Dev and Ops leads to a pathology of communication breakdowns, conflicting goals, and a lack of mutual trust.</p>
+</div>
+<hr />
+<h2 id="the-solution-the-sre-approach">The Solution: The SRE Approach<a class="headerlink" href="#the-solution-the-sre-approach" title="Permanent link">&para;</a></h2>
+<p>Google's definition is simple: <strong>"SRE is what happens when you ask a software engineer to design an operations team."</strong></p>
+<h3 id="team-composition">Team Composition<a class="headerlink" href="#team-composition" title="Permanent link">&para;</a></h3>
+<p>The SRE team is a synthesis of different skill sets, typically split into two buckets:</p>
+<ol>
+<li><strong>50–60% Google Software Engineers:</strong> Hired via standard SWE procedures.</li>
+<li><strong>40–50% System Experts:</strong> Candidates with 85–99% of SWE skills but with rare technical expertise, specifically UNIX system internals and Layer 1–3 networking.</li>
+</ol>
+<h3 id="the-scaling-advantage">The Scaling Advantage<a class="headerlink" href="#the-scaling-advantage" title="Permanent link">&para;</a></h3>
+<p>Unlike the sysadmin model, SRE is designed to scale <strong>sublinearly</strong>.</p>
+<ul>
+<li>SREs are bored by manual tasks and have the skillset to automate them.</li>
+<li>The goal is to create systems that are <strong>automatic</strong>, not just automated.</li>
+<li>The team repairs itself; as the service grows, SREs focus on engineering solutions rather than adding more bodies to the rotation.</li>
+</ul>
+<hr />
+<h2 id="the-50-rule">The 50% Rule<a class="headerlink" href="#the-50-rule" title="Permanent link">&para;</a></h2>
+<p>To prevent the team from drowning in operational load (toil), Google enforces a strict cap on "ops" work.</p>
+<div class="admonition quote">
+<p class="admonition-title">Code or Drown</p>
+<p>The team tasked with managing a service needs to code or it will drown.</p>
+</div>
+<ul>
+<li><strong>The Cap:</strong> SREs spend a maximum of <strong>50%</strong> of their time on ops (tickets, on-call, manual tasks).</li>
+<li><strong>The Remaining 50%:</strong> Must be spent on actual development and engineering projects to make the service stable and operable.</li>
+<li><strong>Enforcement:</strong> If ops load exceeds 50%, the burden is shifted back to the Development team, or staff is added specifically to handle the load without assigning them extra ops duties.</li>
+</ul>
+<hr />
+<h2 id="devops-vs-sre">DevOps vs. SRE<a class="headerlink" href="#devops-vs-sre" title="Permanent link">&para;</a></h2>
+<p>Think of it in object-oriented terms: <strong>class SRE implements DevOps</strong>.</p>
+<ul>
+<li><strong>DevOps:</strong> A general philosophy involving heavy automation and cross-functional cooperation.</li>
+<li><strong>SRE:</strong> A specific implementation of DevOps with idiosyncratic extensions (like error budgets).</li>
+</ul>
+<hr />
+<h2 id="the-tenets-of-sre">The Tenets of SRE<a class="headerlink" href="#the-tenets-of-sre" title="Permanent link">&para;</a></h2>
+<p>While workflows vary, all SRE teams adhere to these core principles to maintain their engineering focus.</p>
+<h3 id="1-durable-focus-on-engineering">1. Durable Focus on Engineering<a class="headerlink" href="#1-durable-focus-on-engineering" title="Permanent link">&para;</a></h3>
+<p>We monitor the operational load to ensure we have time to code.</p>
+<ul>
+<li><strong>On-Call Limit:</strong> Maximum of <strong>2 events</strong> per 8–12 hour shift.</li>
+<li><strong>Why?</strong> More than 2 events prevents thorough investigation and postmortems; fewer than 1 event is a waste of time.</li>
+<li><strong>Postmortems:</strong> Written for all significant incidents (even those that didn't page) to expose faults and apply engineering fixes.</li>
+</ul>
+<h3 id="2-error-budgets-velocity-vs-stability">2. Error Budgets (Velocity vs. Stability)<a class="headerlink" href="#2-error-budgets-velocity-vs-stability" title="Permanent link">&para;</a></h3>
+<p>We resolve the conflict between Dev and Ops by accepting that <strong>100% availability is the wrong target</strong>.</p>
+<div class="arithmatex">\[ Error Budget = 1 - Availability Target \]</div>
+<ul>
+<li><strong>The Reality:</strong> Users cannot distinguish between 100% and 99.999% availability due to the noise of their own ISP, WiFi, or hardware failures.</li>
+<li><strong>The Strategy:</strong> The business defines an availability target (e.g., 99.99%). The remaining 0.01% is the <strong>Error Budget</strong>.</li>
+<li><strong>Spending the Budget:</strong> This budget can be spent on risky feature launches or experiments.</li>
+<li><strong>Consequence:</strong> If the budget is exhausted, releases stop until the system stabilizes. This aligns Dev and Ops incentives.</li>
+</ul>
+<h3 id="3-monitoring">3. Monitoring<a class="headerlink" href="#3-monitoring" title="Permanent link">&para;</a></h3>
+<p>Monitoring shouldn't require humans to stare at screens. There are only three valid outputs:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Definition</th>
+<th style="text-align: left;">Action Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 19v1H3v-1l2-2v-6c0-3.1 2.03-5.83 5-6.71V4a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.29c2.97.88 5 3.61 5 6.71v6zm-7 2a2 2 0 0 1-2 2 2 2 0 0 1-2-2m9.75-17.81-1.42 1.42A8.98 8.98 0 0 1 21 11h2c0-2.93-1.16-5.75-3.25-7.81M1 11h2c0-2.4.96-4.7 2.67-6.39L4.25 3.19A10.96 10.96 0 0 0 1 11"/></svg></span> Alerts</strong></td>
+<td style="text-align: left;">Something is broken or about to break.</td>
+<td style="text-align: left;"><strong>Immediate</strong> human action required.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 8.5h-2v-2h2zm0 4.5h-2v-2h2zm0 4.5h-2v-2h2zm9-7.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 1 2 2 2 2 0 0 1-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 1-2-2 2 2 0 0 1 2-2"/></svg></span> Tickets</strong></td>
+<td style="text-align: left;">Something needs attention, but it can wait a few days.</td>
+<td style="text-align: left;"><strong>Delayed</strong> human action required.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 7c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-4h-2v4h-2V9h4V7zM2 7v10h6v-2H4V7zm9 0c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 2h2v6h-2z"/></svg></span> Logging</strong></td>
+<td style="text-align: left;">Recorded for forensics/diagnostics.</td>
+<td style="text-align: left;"><strong>No</strong> action unless prompted by an investigation.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-emergency-response">4. Emergency Response<a class="headerlink" href="#4-emergency-response" title="Permanent link">&para;</a></h3>
+<p>Reliability is a function of Mean Time to Failure (MTTF) and Mean Time to Repair (MTTR).</p>
+<ul>
+<li><strong>Objective:</strong> Lower MTTR.</li>
+<li><strong>Playbooks:</strong> Recording best practices in a playbook produces roughly <strong>3x improvement in MTTR</strong> compared to "winging it".</li>
+<li><strong>Practice:</strong> Use exercises like the "Wheel of Misfortune" to prepare engineers.</li>
+</ul>
+<h3 id="5-change-management">5. Change Management<a class="headerlink" href="#5-change-management" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Fact:</strong> Roughly <strong>70%</strong> of outages are due to changes in a live system.</li>
+<li><strong>Mitigation:</strong><ul>
+<li>Progressive rollouts.</li>
+<li>Quick/Accurate problem detection.</li>
+<li>Safe rollback capabilities.</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-capacity-planning">6. Capacity Planning<a class="headerlink" href="#6-capacity-planning" title="Permanent link">&para;</a></h3>
+<p>We must ensure sufficient capacity for organic (natural adoption) and inorganic (launches/marketing) growth.</p>
+<div class="admonition tip">
+<p class="admonition-title">Mandatory Steps</p>
+<ol>
+<li><strong>Forecast:</strong> Accurate organic demand forecasting beyond lead times.</li>
+<li><strong>Inorganic:</strong> Incorporation of business-driven events (launches).</li>
+<li><strong>Load Testing:</strong> Regular testing to correlate raw capacity (disk/cpu) to service capacity.</li>
+</ol>
+</div>
+<h3 id="7-provisioning">7. Provisioning<a class="headerlink" href="#7-provisioning" title="Permanent link">&para;</a></h3>
+<p>Provisioning combines change management and capacity planning. It must be fast, correct, and only done when necessary because capacity is expensive.</p>
+<h3 id="8-efficiency-and-performance">8. Efficiency and Performance<a class="headerlink" href="#8-efficiency-and-performance" title="Permanent link">&para;</a></h3>
+<p>SREs are ultimately responsible for utilization and cost.</p>
+<ul>
+<li><strong>The Lever:</strong> Provisioning strategy is a massive lever on total service costs.</li>
+<li><strong>Performance:</strong> A slow system eventually stops serving (infinite slowness). Improving performance adds capacity and efficiency.</li>
+</ul>
+<p><strong>Next Steps:</strong>
+Check out the <strong><a href="https://prometheus.io/docs/introduction/overview/">Prometheus Documentation</a></strong> to see how modern monitoring implements the Alerting vs. Logging distinction mentioned in Tenet 3.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "content.code.annotate", "navigation.instant", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "search.share"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
