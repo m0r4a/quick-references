@@ -2,28 +2,9 @@ site_name: Mora's blog
 site_url: https://blog.gmora.work
 docs_dir: docs
 
-plugins:
-  - search
-  - i18n:
-      docs_structure: folder
-      fallback_to_default: true
-      reconfigure_material: true
-      reconfigure_search: true
-      languages:
-        - locale: en
-          name: English
-          build: true
-          default: true
-          site_name: "Mora's blog"
-        - locale: es
-          name: Español
-          build: true
-          site_name: "Blog de Mora"
-
 theme:
   name: material
   logo: assets/logo.png
-  language: en
   favicon: assets/favicon.png
 
   palette:
@@ -36,12 +17,21 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
   features:
     # Code
     - content.code.copy
     - content.code.annotate
 
     # Navigation
+    - navigation.instant
     - navigation.tabs
     - navigation.sections
     - navigation.top
@@ -84,16 +74,6 @@ markdown_extensions:
   - md_in_html
   - pymdownx.keys
 
-
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
-extra:
-  alternate:
-    - name: English
-      link: /
-      lang: en
-    - name: Español
-      link: /es/
-      lang: es
